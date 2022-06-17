@@ -1,5 +1,3 @@
-import torch
-
 class Hook():
     def __init__(self, model, layer_name, backward=False):
 
@@ -13,9 +11,9 @@ class Hook():
         self.input_f = input
         self.output_f = output#.requires_grad_(True)
 
-    def hook_fn_b(self, layer, input, output):
-        self.input_b = input
-        self.output_b = output
+    # def hook_fn_b(self, layer, input, output):
+    #     self.input_b = input
+    #     self.output_b = output
     
     def close(self):
         self.hook.remove()

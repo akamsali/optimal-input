@@ -1,5 +1,5 @@
 import torch
-from gradient_extraction.hook import Hook
+from optimal_input.hook import Hook
 
 
 class GetValues:

@@ -1,5 +1,4 @@
 from transformers import Speech2TextForConditionalGeneration, Speech2TextProcessor
-from auditory_cortex.feature_extractors import Feature_Extractor_S2T
 
 class TransformerModel:	
     def __init__(self):
