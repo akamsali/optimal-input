@@ -15,14 +15,17 @@ class GetOptInput:
         self.optimizer.step()
         return loss.item()
 
-    def get_opt_input(self, aud, layer, beta, iterations=10):
+    def get_opt_input(self, layer, beta, spect_width, iterations=2):
         self.hook = Hook(self.model, layer, backward=True)
         self.beta = torch.tensor(beta.T)
 
-        self.spect = self.feature_extractor(aud, sampling_rate=16000, return_tensors="pt").input_features
+        # self.spect = self.
+        torch.manual_seed(0)
+        self.spect = torch.rand(size=(1, spect_width, 80))
+
         self.spect.requires_grad = True
 
-        self.optimizer = torch.optim.Adam([self.spect], lr=0.1)
+        self.optimizer = torch.optim.Adam([self.spect], lr=0.01)
 
         for param in self.model.parameters():
             assert param.requires_grad == False, "Model parameters not frozen"
