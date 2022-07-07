@@ -18,9 +18,9 @@ class GetOptInput:
         self.optimizer.step()
         return loss.item()
 
-    def get_opt_input(self, aud, layer_ID, layer, iterations=10):
+    def get_opt_input(self, aud, layer_ID, layer_name, iterations=10, lr=10):
         self.layer_ID = layer_ID
-        self.hook = Hook(self.model, layer, backward=True)
+        self.hook = Hook(self.model, layer_name, backward=True)
         decoder_input_ids = torch.tensor([[1, 1]]) * self.model.config.decoder_start_token_id
 
         for param in self.model.parameters():
@@ -29,14 +29,17 @@ class GetOptInput:
         self.loss_lists = []
         self.spect_list = []
 
-        # self.spect = self.feature_extractor(aud, sampling_rate=16000, return_tensors="pt").input_features
-        # net_out = self.model(self.spect, decoder_input_ids=decoder_input_ids)
-        # num_units = self.hook.output_f.shape[1]
+        self.spect = self.feature_extractor(aud, sampling_rate=16000, return_tensors="pt").input_features
+        net_out = self.model(self.spect, decoder_input_ids=decoder_input_ids)
+        if self.layer_ID < 2:
+            num_units = self.hook.output_f.shape[1]
+        else:
+            num_units = self.hook.output_f.shape[2]
 
-        for unit in range(512):
+        for unit in range(num_units):
             self.spect = self.feature_extractor(aud, sampling_rate=16000, return_tensors="pt").input_features
             self.spect.requires_grad = True
-            self.optimizer = torch.optim.Adam([self.spect], lr=10)
+            self.optimizer = torch.optim.Adam([self.spect], lr=lr)
             loss_list = []
 
             self.optimizer.zero_grad()

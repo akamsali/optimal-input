@@ -19,7 +19,6 @@ class GetOptInput:
         self.hook = Hook(self.model, layer, backward=True)
         self.beta = torch.tensor(beta.T)
 
-        # self.spect = self.
         torch.manual_seed(0)
         self.spect = torch.rand(size=(1, spect_width, 80))
 
