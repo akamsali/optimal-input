@@ -12,4 +12,4 @@ class GetValues:
         
         net_out = self.model(spect, decoder_input_ids=decoder_input_ids)
 
-        # return self.hook.output_f
+        return self.hook.output_f
