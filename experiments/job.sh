@@ -6,12 +6,13 @@
 #SBATCH --time=12:00:00
 #SBATCH --output=/scratch/gilbreth/akamsali/Research/Makin/optimal-input/experiments/outputs.txt
 #SBATCH --error=/scratch/gilbreth/akamsali/Research/Makin/optimal-input/experiments/error.txt
-#SBATCH --job-name layer_0
+#SBATCH --job-name W2L
 
 # Print the hostname of the compute node on which this job is running.
 /bin/hostname
 
 . ~/.bashrc
-conda activate research_env
+conda activate research
 
-python /scratch/gilbreth/akamsali/Research/Makin/Auditory_Cortex/notebooks/opt_output.py
+python /scratch/gilbreth/akamsali/Research/Makin/optimal-input/experiments/w2l_opt.py
+

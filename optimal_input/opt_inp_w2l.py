@@ -1,5 +1,7 @@
 import torch
 from optimal_input.hook import Hook
+from tqdm import tqdm
+
 class GetOptInput:
     def __init__(self, model):
         self.model = model 
@@ -27,7 +29,7 @@ class GetOptInput:
         self.loss_list = []
 
         self.optimizer.zero_grad()
-        for i in range(iterations):
+        for i in tqdm(range(iterations)):
             net_out = self.model(self.aud)
             l = self.back_prop_step()
             self.loss_list.append(l)
