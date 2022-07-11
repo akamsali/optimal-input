@@ -1,7 +1,14 @@
 # optimal-input
 
-# Auditory_cortex
+This repository has dependencies on the following repository:
 
+[Auditory cortex](https://github.com/bilalhsp/Auditory_Cortex)
+
+```git clone https://github.com/bilalhsp/Auditory_Cortex.git```
+
+go to the directory Auditory_Cortex
+
+```pip install -e .```
 
 [Repo Link](https://github.com/akamsali/optimal-input)
 
@@ -11,5 +18,6 @@ go to the directory optimal-input
 
 ```pip install -e .```
 
-Modelling the auditory cortex using task optimized Deep Learning models 
+This repository extracts features from a neural network, spikes from monkey data and computes linear regeression between them. 
+It also finds the optimal input which maximises the layer output by propagating loss all the way to the input. 
 
